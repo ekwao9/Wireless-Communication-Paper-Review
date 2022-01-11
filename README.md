@@ -1,6 +1,7 @@
-# Wireless Communication Engineering Paper Review
+# Wireless Communication Engineering: Paper Review and Simulation Practice
 - This repository provides weekly reviews on selected key concepts in wireless communication and simulation practice codes.
-- If you have any questions, please leave them in the [Issues](https://github.com/ekwao9/Wireless-Communication-Paper-Review/issues) tab of this repository
+- If you have any questions, please leave them in the [Issues](https://github.com/ekwao9/Wireless-Communication-Paper-Review/issues) tab of this repository.
+
 
 ###  LTE Random Access Procedure
 - A Novel Random Access for Fixed-location Machine-to-Machine Communications in OFDMA Based Systems (Week 1 - Jan. 07, 2022)
