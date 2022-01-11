@@ -1,4 +1,4 @@
-# Wireless Communication Engineering: Paper Review & Simulation Practice
+# Wireless Communication Engineering: *Paper Review & Simulation*
 - This repository provides weekly reviews on selected key concepts in wireless communication with related simulation practice codes.
 - If you have any questions, please leave them in the [Issues](https://github.com/ekwao9/Wireless-Communication-Paper-Review/issues) tab of this repository.
 
