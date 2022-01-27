@@ -66,7 +66,7 @@ for M_1 = 5
                check = sum(logical(other_dev == device_k)); % preamble comparison procedure
           end
 
-          if (check >= 1)
+          if (check > 1||check == 1)
                col_event = col_event + 1;
                continue;
           end
@@ -98,7 +98,7 @@ for i1 = 1:length(RA_attempt)
                check = sum(logical(other_dev == device_k)); % preamble comparison procedure
           end
     
-          if (check >= 1)
+          if (check > 1||check == 1)
                col_event = col_event + 1;
                continue;
           end
