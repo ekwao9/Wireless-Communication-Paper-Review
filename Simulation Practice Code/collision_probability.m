@@ -43,14 +43,79 @@ grid on;
 
 xlim([2 10]); ylim([10^-3 10^0]);
 
-xlabel('Number of RA attempts from machine devices on a single RA slot (k+1)'); ylabel("Collision Probability P_c'ue");
-legend('M = 5 Conv.(anal)','M = 20 conv.(anal)','M = 5 prop.(anal)','M = 5 Prop.(anal)','M = 20 Prop.(anal)','Location','southeast');
-
-
 %.........Conventional & Proposed Procedure(Simulated)..............................
 
+n_itr = 10000;
+RA_attempt = linspace(2,10,9);
+other_selec = zeros(1,length(RA_attempt));
+col_prob1 = zeros(1,length(RA_attempt));
+M_1 = 1:5;
+prem = randperm(numel(M_1)); % Generation of random preambles
 
+for M_1 = 5
+    for i1 = 1:length(RA_attempt)
+         k = RA_attempt(i1);
+      
+      col_event =  0;
+      for i2= 1:n_itr
+            device_k = M_1(randperm(numel(M_1),1)); % preamble selection by device k
 
+          for i3 = 1:(k-1)         % preamble selection procedure by (k-1) devices
+               other_selec(i3) = randsample(prem,1);
+               other_dev = other_selec(:,:);  % Selected preambles by (k-1) devices
+               check = sum(logical(other_dev == device_k)); % preamble comparison procedure
+          end
+
+          if (check >= 1)
+               col_event = col_event + 1;
+               continue;
+          end
+      end  
+            col_prob1(i1) = (col_event/n_itr); % Probability of collision computation
+   end    
+end
+
+hold on;
+
+% M = 20
+n_itr = 10000;
+RA_attempt = linspace(2,10,9);
+other_selec = zeros(1,length(RA_attempt));
+col_prob2 = zeros(1, length(RA_attempt));
+M_2 = 1:20;
+prem = randperm(numel(M_2)); % Generation of random preambles
+
+for i1 = 1:length(RA_attempt)
+     k = RA_attempt(i1);
+
+     col_event =  0;
+     for i2 = 1:n_itr
+         device_k = M_2(randperm(numel(M_2),1)); % preamble selection by device k
+
+          for i3 = 1:(k-1)         % preamble selection procedure by (k-1) devices
+               other_selec(i3) = randsample(prem,1);
+               other_dev = other_selec(:,:);  % Selected preambles by (k-1) devices
+               check = sum(logical(other_dev == device_k)); % preamble comparison procedure
+          end
+    
+          if (check >= 1)
+               col_event = col_event + 1;
+               continue;
+          end
+      end  
+            col_prob2(i1) = (col_event/n_itr); % Probability of collision computation
+end    
+
+hold on;
+figure(1);
+semilogy(RA_attempt, col_prob1, 'ko'); hold on; semilogy(RA_attempt, col_prob2, 'ks');
+ylim([10^-3 10^0])
+grid on;
+
+xlim([2 10]); ylim([10^-3 10^0]);
+
+xlabel('Number of RA attempts from machine devices on a single RA slot (k+1)'); ylabel("Collision Probability P_c'ue");
+legend('M = 5 conv.(anal)','M = 20 conv.(anal)','M = 5 prop.(anal)','M = 20 Prop.(anal)','M = 5 conv.(sim)','M = 20 conv.(sim)','Location','southeast');
 
 
 
