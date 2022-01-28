@@ -17,7 +17,7 @@ for M = 5
     for i = k
         f_1 = r*(1 -(R^2 -(r - e*c/2)^2)/(M*R^2)).^k;
         f_2 = r*(1 -((r + (e*c/2))^2)/(M*R^2)).^k;
-        f_3 = r*(1 -((4*e*c/2)^2)/(M*R^2)).^k;
+        f_3 = r*(1 -((4*e*r*c/2))/(M*R^2)).^k;
         intg1 = (1-(2/R^2)*(int(f_1,r,[(R-e*c/2) R]) + int(f_2,r,[0 e*c/2]) + int(f_3,r,[e*c/2 R-e*c/2])));
         
         p_conv1 = 1-(1-(1/M)).^(k-1);
@@ -28,7 +28,7 @@ end
 for M = 20
     f_1 = r*(1 -(R^2 -(r - e*c/2)^2)/(M*R^2)).^k;
     f_2 = r*(1 -((r + (e*c/2))^2)/(M*R^2)).^k;
-    f_3 = r*(1 -((4*e*c/2)^2)/(M*R^2)).^k;
+    f_3 = r*(1 -((4*e*r*c/2))/(M*R^2)).^k;
     intg2 = (1-(2/R^2)*(int(f_1,r,[(R-e*c/2) R]) + int(f_2,r,[0 e*c/2]) + int(f_3,r,[e*c/2 R-e*c/2])));
    
     p_conv2 = 1-(1-(1/M)).^(k-1);
@@ -37,7 +37,7 @@ for M = 20
 end
 
 figure(1);
-semilogy(k, p_conv1,'k-'); hold on; semilogy(k, p_conv2, 'r-');
+semilogy(k, p_conv1,'k-'); hold on; semilogy(k, p_conv2, 'k-');
 hold on; semilogy(k,p_prop1,'k-.'); hold on; semilogy(k,p_prop2,'k--')
 grid on;
 
