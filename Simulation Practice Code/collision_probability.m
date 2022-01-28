@@ -118,7 +118,53 @@ xlabel('Number of RA attempts from machine devices on a single RA slot (k+1)'); 
 legend('M = 5 conv.(anal)','M = 20 conv.(anal)','M = 5 prop.(anal)','M = 20 Prop.(anal)','M = 5 conv.(sim)','M = 20 conv.(sim)','Location','southeast');
 
 
+%..................Proposed procedure (simulated)....................................................................
 
+% dev_k_dis = dis(randperm(numel(dis),1));
+% dev_k_pream = M(randperm(numel(M),1));
+% dev_k_TA = ((dev_k_dis)*2)/(c);
+% 
+% dev_k = [dev_k_pream;dev_k_dis;dev_k_TA];
+% const = (e*c/2);
+% intval_1 = abs(dis-const);
+% intval_2 = abs(dis+const);
+
+
+
+% for i1 = 1:length(RA_attempt)
+%       RA_sample = RA_attempt(i1);
+%      
+%       col_event =  0;
+%       for i2 = 1:n_iter
+%           dev_k_pre = M(randperm(numel(M),1));
+%           dev_k_dis = dis(randperm(numel(dis),1));
+% 
+%           for i3 = 1:(RA_sample-1)   % (k-1) device selection         
+%                pre_select(i3) = randsample(prem,1);
+%                other_dis(i3) = dis(randperm(numel(dis),1));
+% 
+%                
+%                other_devs_dis = other_dis(:,:);
+%                other_devs_pre = pre_select(:,:);
+% 
+%                check1 = sum(logical(other_devs_pre == dev_k_pre));
+%                check2 = sum(ismember(other_devs_dis,intval_1));
+%                check3 = sum(ismember(other_devs_dis,intval_2));
+% 
+%           end
+%             
+%           if (check1 > 1 || check1 == 1) && (check2 >= 1 || check3 >= 1)
+%                col_event = col_event + 1;
+%           end
+%  
+%      end  
+% 
+%             col_prob(i1) = (col_event/n_iter);
+% end 
+% 
+% % figure(1);
+% semilogy(RA_attempt, col_prob, 'ko');
+% ylim([10^-3 10^0])
 
 
 
