@@ -119,7 +119,8 @@ hold on;
 
 M = 5; % number of preambles
 RA_attempts = (2:10);
-R = 2000;
+k = linspace(2,10,9);
+R = 2e3;
 e = 0.52e-6;
 c = 3e8;
 
@@ -186,7 +187,7 @@ hold on;
 
 M = 20; % number of preambles
 RA_attempts = (2:10);
-R = 2000;
+R = 2e3;
 e = 0.52e-6;
 c = 3e8;
 
@@ -252,18 +253,6 @@ ylim([10^-3 1])
 
 xlabel('Number of RA attempts from machine devices on a single RA slot (k+1)'); ylabel("Collision Probability P_c'ue");
 legend('M = 5 conv.(anal)','M = 20 conv.(anal)','M = 5 prop.(anal)','M = 20 Prop.(anal)','M = 5 conv.(sim)','M = 20 conv.(sim)','M = 5 Prop.(sim)','M = 20 Prop.(sim)','Location','southeast');
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
