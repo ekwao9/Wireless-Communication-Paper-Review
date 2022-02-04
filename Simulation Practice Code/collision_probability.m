@@ -77,7 +77,6 @@ end
 
 hold on;
 
-% M = 20
 n_itr = 10000;
 RA_attempt = linspace(2,10,9);
 other_selec = zeros(1,length(RA_attempt));
@@ -114,57 +113,152 @@ grid on;
 
 xlim([2 10]); ylim([10^-3 10^0]);
 
+hold on;
+
+%.........Proposed Procedure(simulated).................................
+
+M = 5; % number of preambles
+RA_attempts = (2:10);
+R = 2000;
+e = 0.52e-6;
+c = 3e8;
+
+eNB = [0,0];
+machines = 9;
+
+col_prob = zeros(1,9);
+
+
+for l1 = 1:9
+      RA_sample = RA_attempts(l1);
+
+      ang1 = rand*(2*pi);
+      
+      preams = randperm(M);
+      dev_k = machines(randperm(numel(machines),1));
+      
+      d1 = sqrt(rand)*R;
+      dev_kx = dev_k + d1.*cos(ang1);
+      dev_ky = dev_k + d1.*sin(ang1);
+
+          coll_event =  0;
+          for l2 = 1:n_itr 
+
+                ang2 = rand(1,RA_sample)*(2*pi);
+                d2 = sqrt(rand(1,RA_sample))*R;
+                o_devx = 0 + d2.*cos(ang2);
+                o_devy = 0 + d2.*sin(ang2);
+
+                ro = sqrt(((dev_kx-eNB(1))^2) + ((dev_ky-eNB(2))^2)); % distance btn tagged device and eNB
+
+                range1 = (ro-e*c/2); range2 = (ro+e*c/2);  % collision zones
+                To = (2*ro)/c; % Tagged device TA value
+
+                devk_pre = randsample(preams,1);
+                otherdev_pre = randsample(preams,1);
+
+                     for l3 = 1:RA_sample-1
+                         check1 = sqrt((o_devx(l3)-eNB(1))^2 + (o_devy(l3)-eNB(2))^2);
+                         
+                         loc_comp = 0;
+                        if check1 >= range1 && check1 <= range2
+                           loc_comp = loc_comp + 1;
+
+                           check2 = logical(otherdev_pre == devk_pre);
+                           if ((check2 == 1) && (loc_comp == 1))
+                                coll_event = coll_event + 1;
+                            
+                          end
+                        end
+
+                     end
+
+          end
+
+                 col_prob(l1) = coll_event/n_itr;
+end     
+
+semilogy(k, col_prob,'ko')
+grid on
+ylim([10^-4 1])
+
+hold on;
+
+M = 20; % number of preambles
+RA_attempts = (2:10);
+R = 2000;
+e = 0.52e-6;
+c = 3e8;
+
+eNB = [0,0];
+
+machines = 9;
+
+col_prob = zeros(1,9);
+
+
+for l1 = 1:9
+      RA_sample = RA_attempts(l1);
+
+      ang1 = rand*(2*pi);
+      
+      preams = randperm(M);
+      dev_k = machines(randperm(numel(machines),1));
+      
+      d1 = sqrt(rand)*R;
+      dev_kx = dev_k + d1.*cos(ang1);
+      dev_ky = dev_k + d1.*sin(ang1);
+
+          coll_event =  0;
+          for l2 = 1:n_itr 
+
+                ang2 = rand(1,RA_sample)*(2*pi);
+                d2 = sqrt(rand(1,RA_sample))*R;
+                o_devx = 0 + d2.*cos(ang2);
+                o_devy = 0 + d2.*sin(ang2);
+
+                ro = sqrt(((dev_kx-eNB(1))^2) + ((dev_ky-eNB(2))^2)); % distance btn tagged device and eNB
+
+                range1 = (ro-e*c/2); range2 = (ro+e*c/2);  % collision zones
+                To = (2*ro)/c; % Tagged device TA value
+
+                devk_pre = randsample(preams,1);
+                otherdev_pre = randsample(preams,1);
+
+                     for l3 = 1:RA_sample-1
+                         check1 = sqrt((o_devx(l3)-eNB(1))^2 + (o_devy(l3)-eNB(2))^2);
+                         
+                         loc_comp = 0;
+                        if check1 >= range1 && check1 <= range2
+                           loc_comp = loc_comp + 1;
+
+                           check2 = logical(otherdev_pre == devk_pre);
+                           if ((check2 == 1) && (loc_comp == 1))
+                                coll_event = coll_event + 1;
+                            
+                          end
+                        end
+
+                     end
+
+          end
+
+                 col_prob(l1) = coll_event/n_itr;
+end     
+
+semilogy(k, col_prob,'ks')
+grid on
+ylim([10^-3 1])
+
 xlabel('Number of RA attempts from machine devices on a single RA slot (k+1)'); ylabel("Collision Probability P_c'ue");
-legend('M = 5 conv.(anal)','M = 20 conv.(anal)','M = 5 prop.(anal)','M = 20 Prop.(anal)','M = 5 conv.(sim)','M = 20 conv.(sim)','Location','southeast');
-
-
-%..................Proposed procedure (simulated)....................................................................
-
-% dev_k_dis = dis(randperm(numel(dis),1));
-% dev_k_pream = M(randperm(numel(M),1));
-% dev_k_TA = ((dev_k_dis)*2)/(c);
-% 
-% dev_k = [dev_k_pream;dev_k_dis;dev_k_TA];
-% const = (e*c/2);
-% intval_1 = abs(dis-const);
-% intval_2 = abs(dis+const);
+legend('M = 5 conv.(anal)','M = 20 conv.(anal)','M = 5 prop.(anal)','M = 20 Prop.(anal)','M = 5 conv.(sim)','M = 20 conv.(sim)','M = 5 Prop.(sim)','M = 20 Prop.(sim)','Location','southeast');
 
 
 
-% for i1 = 1:length(RA_attempt)
-%       RA_sample = RA_attempt(i1);
-%      
-%       col_event =  0;
-%       for i2 = 1:n_iter
-%           dev_k_pre = M(randperm(numel(M),1));
-%           dev_k_dis = dis(randperm(numel(dis),1));
-% 
-%           for i3 = 1:(RA_sample-1)   % (k-1) device selection         
-%                pre_select(i3) = randsample(prem,1);
-%                other_dis(i3) = dis(randperm(numel(dis),1));
-% 
-%                
-%                other_devs_dis = other_dis(:,:);
-%                other_devs_pre = pre_select(:,:);
-% 
-%                check1 = sum(logical(other_devs_pre == dev_k_pre));
-%                check2 = sum(ismember(other_devs_dis,intval_1));
-%                check3 = sum(ismember(other_devs_dis,intval_2));
-% 
-%           end
-%             
-%           if (check1 > 1 || check1 == 1) && (check2 >= 1 || check3 >= 1)
-%                col_event = col_event + 1;
-%           end
-%  
-%      end  
-% 
-%             col_prob(i1) = (col_event/n_iter);
-% end 
-% 
-% % figure(1);
-% semilogy(RA_attempt, col_prob, 'ko');
-% ylim([10^-3 10^0])
+
+
+
+
 
 
 
