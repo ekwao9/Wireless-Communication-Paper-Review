@@ -10,7 +10,7 @@ k = 2:10; % RA attempts
 
 % For M number of Preambles
 
-%..........Conventional & Proposed Procedure(Analytical).........................
+%..........Conventional & Proposed Procedure(Analytical)...........................
 
 
 for M = 5
