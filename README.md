@@ -14,7 +14,10 @@
 
   - [Original Paper Link](https://ieeexplore.ieee.org/abstract/document/4543070)  /  [Presentation summary slides]() / [Practice simulation code](https://github.com/ekwao9/Wireless-Communication-Paper-Review/tree/main/PLS%20codes)
 
+###  Multiple Antennas in Wireless Communication
+- Diversity and Multiplexing: A Fundamental Tradeoff in Multiple-Antenna Channels
 
+  - [Original Paper Link](https://ieeexplore.ieee.org/abstract/document/1197843)  /  [Presentation summary I]()
 
 
 
