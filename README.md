@@ -17,7 +17,7 @@
 ###  Multiple Antennas in Wireless Communication
 - Diversity and Multiplexing: A Fundamental Tradeoff in Multiple-Antenna Channels
 
-  - [Original Paper Link](https://ieeexplore.ieee.org/abstract/document/1197843)  /  [Presentation summary I]()
+  - [Original Paper Link](https://ieeexplore.ieee.org/abstract/document/1197843)  /  [Presentation summary I](https://github.com/ekwao9/Wireless-Communication-Paper-Review/blob/main/Summary%20Files/Div%20and%20Mul%20Tradeoff.pdf)
 
 
 
